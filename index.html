@@ -48,7 +48,7 @@ const firebaseConfig = {
   messagingSenderId: "778662881767",
   appId: "1:778662881767:web:8b7d4fab43b7ac3af2f542"
 };
-const HOST_PIN = "1234";      // รหัสเข้าหน้าครู (เปิดด้วย index.html?host=1)
+const HOST_PIN = "366282";      // รหัสเข้าหน้าครู (เปิดด้วย index.html?host=1)
 const MAX_PLAYERS = 100, FILL_MS = 5*60*1000;
 
 /* ====== สารประกอบ 50 ตัว (ข้อ 27 ในรูปซ้ำกับข้อ 4 จึงเปลี่ยนเป็น LiOH) ====== */
@@ -131,7 +131,7 @@ function renderStudent(){
   const st=game.state,n=Object.keys(names).length;
   let h=`<h2 class="c">สวัสดี ${esc(names[pid])} 👋</h2>`;
   if(st==='lobby'){
-    h+=`<div class="box c"><h2>⏳ รอครูเริ่มเกม...</h2><p>ผู้เล่นในห้อง ${n} คน</p>${Object.values(names).map(x=>`<span class="chip">${esc(x)}</span>`).join('')}</div>`;
+    h+=`<div class="box c"><h2>⏳ รอครูเริ่มเกม...</h2><p>ผู้เล่นในห้อง ${n} คน</p>${Object.values(names).slice(-60).map(x=>`<span class="chip">${esc(x)}</span>`).join('')}${n>60?` <span class="chip">…และอีก ${n-60} คน</span>`:''}</div>`;
   }else{
     const open=st==='fill'&&now()<game.fillEnd;
     if(st==='fill')h+=`<div class="timer">⏱ <span id="t">${fmt(game.fillEnd-now())}</span></div><p class="c">เลือกสารประกอบมาใส่ตาราง 16 ช่อง (ไม่ซ้ำกัน)</p>`;
